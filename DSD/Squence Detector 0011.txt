@@ -1,0 +1,33 @@
+// Sequence detector for pattern »0110"
+module seq_detector (x, clk, reset, z);
+input x, clk, reset;
+output reg z;
+parameter So=0, S1=1, S2=2, S3=3;
+reg [0:1] PS, NS;
+always @ (posedge clk or posedge reset)
+if (reset) PS <= so;
+else
+PS <= NS;
+always @ (PS, X)
+case (PS)
+So: begin
+z = x ? 0:0;
+Ns = x ? so : s1;
+end
+S1: begin
+z = x ? 0: 0;
+NS = X ? S2 : 51;
+end
+S2: begin
+z = x ? O: 0;
+NS = x ? S3 : 51;
+end
+S3: begin
+x ? 0 : 1;
+0
+NS = x ? so si;
+x
+end
+endcase
+endmodule
+z

@@ -1,0 +1,21 @@
+Circuit: * D:\ECE-Lab\EC201\L6New\Complete.asc
+
+Direct Newton iteration for .op point succeeded.
+
+Date: Wed Dec 01 22:13:21 2021
+Total elapsed time: 0.132 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 2113
+traniter = 2102
+tranpoints = 1052
+accept = 1051
+rejected = 1
+matrix size = 39
+fillins = 40
+solver = Normal
+Matrix Compiler1: 3.68 KB object code size  0.7/0.3/[0.2]
+Matrix Compiler2: 3.82 KB object code size  0.3/0.4/[0.3]
+

@@ -1,0 +1,28 @@
+Q1 
+
+a) 12.2 Volts because Vaverage = 0.637 Vmax, hence Vmax has to be 0.637 for Vavg to be 8V
+
+b) It will decrease
+
+c) Vrms = Vmax/root 2 = 8.62V
+
+d) Ripple factor = 0.482
+
+e) 
+
+f)pic
+
+f) 
+
+g)
+
+h)
+
+
+
+Q2)
+
+We can see clearly that the output waveform looks very similar to that of a DC waveform. It still has some small variations, but its peak is very little and it resembles that of a DC output.
+
+
+

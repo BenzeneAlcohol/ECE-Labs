@@ -1,0 +1,208 @@
+1. module decade_counter(counter_up, load, reset, counter_on, data_in, clk, count, TC);
+	input [3:0] data_in;
+	input counter_up, load, reset, counter_on, clk;
+	output reg [3:0] count;
+	output reg TC;
+
+	always@(posedge clk, negedge reset)
+	begin
+		// async reset
+		if (!reset)
+			count <= 0;
+		// load data_in
+		else if (load)
+			count <= data_in;
+		// increment counter
+		else if (counter_on == 1 && counter_up == 1)
+			begin
+				count <= count + 1;
+				// terminal carry = 1 when count = 9
+				if (count == 4'b1001);
+					TC <= 1;
+			end  
+		else if (counter_on == 1 && counter_up == 0)
+			begin
+				count <= count - 1;
+				// terminal carry = 1 when count = 0
+				if (count == 4'b0000)
+					TC <= 1;
+			end
+	end
+endmodule
+
+
+
+3. module up_counter_nbit(R, Resetn, Clk, PCinc, PCload, Q);
+	parameter n = 4;
+	input [n-1:0] R;
+	input Resetn, Clk, PCload, PCinc;
+	output reg [n-1:0] Q;
+
+	always@(negedge Resetn, posedge Clk)
+		if (!Resetn)
+			Q <=0;
+		else if (PCload)
+			Q <= R;
+		else if (PCinc)
+			Q <= Q + 1;
+endmodule 
+
+
+4. module univ_shift_reg_74194(R,sel,clk,Q, reset, lsi, rsi);
+	input [3:0]R;
+	input [1:0]sel;
+	input reset, clk, lsi, rsi;
+	output reg [3:0]Q;
+
+	always@(posedge clk, negedge reset)
+		if (!reset)
+			Q <= 4'b0000;
+		else
+			begin
+				case (sel)
+					// no change
+					2'b00:
+						begin
+							Q[3] <= Q[3];
+							Q[2] <= Q[2];
+							Q[1] <= Q[1];
+							Q[0] <= Q[0];
+						end
+					// shift right
+					2'b01:
+						begin				
+							Q[3] <= rsi;
+							Q[2] <= Q[3];
+							Q[1] <= Q[2];
+							Q[0] <= Q[1];
+						end
+					// shift left
+					2'b10:
+						begin		
+							Q[0] <= lsi;
+							Q[1] <= Q[0];
+							Q[2] <= Q[1];
+							Q[3] <= Q[2];
+						end
+					// load
+					2'b11:
+						begin			
+							Q <= R;
+						end
+				endcase
+			end
+endmodule
+
+5. module rignCounterSelfCorrecting(input clk,
+ input resetn,
+ output reg [3:0] Q);
+
+always @(negedge resetn, posedge clk)
+begin
+	if(!resetn) Q <= 4'b1000;
+	else if(Q==4'b1000 || Q==4'b0100 || Q==4'b0010) Q <= Q >> 1;
+	else Q<=4'b1000;
+end
+endmodule
+
+
+
+6. module pr_sequence_gen(clk,start,qout);
+	parameter N=8;
+	parameter [N:0] tap = 9'b100011101; //x^8 + x^4 + x^3 + x^2 + 1
+	input clk , start;
+	output reg [N-1:0] qout;
+	wire d;
+
+	assign d = ^((tap[N-1:0]) & qout [N-1:0]);
+	always @(posedge clk or posedge start)
+		if (start) qout <= {1'b1, {N-1{1'b0}}};
+		else qout <= {d, qout [N-1:1]};
+endmodule
+
+
+2. 
+
+module decadeCounter(input counter_up,
+input load,
+input reset,
+input counter_on,
+input clk,
+input [3:0] data_in,
+output reg [3:0] count,
+output reg TC);
+
+always@(posedge clk)
+begin
+	if(load) count <= data_in;
+	else if(reset) count <= 0;
+	else if(counter_on) begin
+		if(counter_up) begin
+		if(count<9) count <= count + 1;
+		else count <= 0;
+		if(count==9) TC <=1;
+		else TC<=0;
+		end else begin
+		if(count>0) count <= count - 1;
+		else count <= 9;
+		if(count==9) TC <=1;
+		else TC<=0;
+		end
+	end
+end
+endmodule
+
+module twoDigitDecadeCounter(input counter_up,
+input load,
+input reset,
+input counter_on,
+input clk,
+input [7:0] data_in,
+output reg [7:0] count,
+output reg TC);
+
+wire n1;
+
+decadeCounter cunit(counter_up,
+ load,
+ reset,
+ counter_on,
+ clk,
+ data_in[3:0],
+ count[3:0],
+ n1);
+decadeCounter cdigit(counter_up,
+ load,
+ reset,
+ counter_on,
+ n1,
+ data_in[3:0],
+ count[3:0],
+ TC);
+endmodule
+
+module testbench_2();
+integer i;
+reg clk, counter_on, resetn, load, counter_up;
+reg [7:0] data_in;
+wire [7:0] count;
+wire TC;
+twoDigitDecadeCounter d1(counter_up,
+load, resetn, counter_on,
+clk, data_in, count, TC);
+initial
+begin
+	resetn=1;#1; resetn=0; #1; resetn=1;
+	load=0; data_in =8'b01001000;
+	counter_on=1; counter_up =1;
+	for( i=0; i<20; i=i+1)begin
+	clk =1; #20; clk =0; #20;	
+	end
+	load =1;
+	clk =1; #20; clk =0; #20; load =0;	
+	counter_up =0;
+	for( i=0; i<20; i=i+1)begin
+	clk =1; #20; clk =0; #20;	
+	end
+end
+endmodule
