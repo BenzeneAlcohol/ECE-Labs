@@ -1,0 +1,8 @@
+D:/Verilog/check.vhd {0 {vcom -work work -2002 -explicit -source -stats=none D:/Verilog/check.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+###### D:/Verilog/check.vhd(1): module hmlo(A,B,C);
+
+** Error: D:/Verilog/check.vhd(1): near "module": syntax error
+
+} {6.0 7.0} {}}

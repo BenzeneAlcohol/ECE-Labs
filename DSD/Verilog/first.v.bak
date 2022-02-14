@@ -1,0 +1,9 @@
+module Decoder_Assign(input[1:0]I,output[3:0]F);
+wire [1:0]S;
+assign S[0]=~I[0];
+assign S[1]=~I[1];
+assign F[0]=S[0]&S[1];
+assign F[1]=I[0]&S[1];
+assign F[2]=S[0]&I[1];
+assign F[3]=I[1]&I[0];
+endmodule

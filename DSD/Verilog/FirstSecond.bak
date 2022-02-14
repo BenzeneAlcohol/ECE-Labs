@@ -1,0 +1,12 @@
+module DecoderCase(input wire I0,I1,output reg [3:0]f);
+always@(*)
+begin
+case(I1&I0)
+2'b00 :f[0]=~I0&(~I1);
+2'b01 :f[1]=I0&(~I1);
+2'b10 :f[2]=~I0&(I1);
+2'b11 :f[3]=I0&I1;
+default :f=1'b0;
+endcase
+end
+endmodule

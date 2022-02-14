@@ -1,0 +1,14 @@
+D:/Verilog/FARD.v {1 {vlog -work work -stats=none D:/Verilog/FARD.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module FullAdder
+-- Compiling module FourBitAdder
+
+Top level modules:
+	FourBitAdder
+
+} {} {}} D:/Verilog/FARA.vhd {0 {vcom -work work -2002 -explicit -stats=none D:/Verilog/FARA.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+** Error (suppressible): D:/Verilog/FARA.vhd(2): (vcom-1491) Empty source files.
+
+} {} {}}

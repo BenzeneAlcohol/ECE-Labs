@@ -1,0 +1,9 @@
+D:/Verilog/hjkjkh.v {1 {vlog -work work -stats=none {D:\Verilog\hjkjkh.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module TDDC
+-- Compiling module TB_Q2
+
+Top level modules:
+	TB_Q2
+
+} {} {}}

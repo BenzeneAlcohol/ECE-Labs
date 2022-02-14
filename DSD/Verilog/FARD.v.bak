@@ -1,0 +1,16 @@
+module FullAdder(input M, N, Oi,output S, Co);
+	assign S = Oi^(M^N);
+	assign Co = (M&N) | Oi&(M^N);
+endmodule
+
+module FourBitAdder(input [3:0]M, N,
+		    input Oi,
+		    output [3:0]S, 
+		    output Co);
+	wire  C1, C2,C3;
+	FullAdder FA1(.M(M[0]),.N(N[0]),.Oi(Oi),.S(S[0]),.Co(C1));
+	FullAdder FA2(.M(M[1]),.N(N[1]),.Oi(O1),.S(S[1]),.Co(C2));
+	FullAdder FA3(.M(M[2]),.N(N[2]),.Oi(O2),.S(S[2]),.Co(C3));
+	FullAdder FA4(.M(M[3]),.N(N[3]),.Oi(O3),.S(S[3]),.Co(Co));
+
+endmodule

@@ -1,0 +1,10 @@
+D:/Verilog/RipplEA.v {1 {vlog -work work -stats=none D:/Verilog/RipplEA.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module FullAdder
+-- Compiling module FourBitAdder
+-- Compiling module Test4bitadder
+
+Top level modules:
+	Test4bitadder
+
+} {} {}}

@@ -1,0 +1,1 @@
+clock=0, data=0, twoC=0 
